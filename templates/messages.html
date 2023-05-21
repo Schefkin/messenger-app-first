@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Messages
+{% endblock %}
+
+{% block main %}
+    
+    {% if session["my_value"] %}
+        <p name="messages_friends">Currently messaging: "{{ my_value }}"</p>
+
+        <div class="scrollable-container" id="scrollable-container">
+            
+            {% for message in previous_messages %}
+
+                {% if message['sender'] == my_current_name %}
+                    <div>
+                        <p class="message_mine"> {{ message['message'] }} </p>
+                        <p style="clear: left;"></p>
+                    </div>
+                {% elif message['sender'] == my_value %}
+                    <div>
+                        <p class="message_theirs"> {{ message['message'] }} </p>
+                        <p style="clear: right;"></p>
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+        <br>
+
+        <form action="/messages" method="post">
+            <div class="mb-3">
+                <input autocomplete="off" type="text" name="message_itself" class="input" autofocus>
+            </div>
+        </form>
+
+    {% else %}
+        <p name="messages_friends">Select a friend to message!</p>
+    {% endif %}
+    
+
+
+
+    <script src="static/scroll_down.js"></script>
+
+{% endblock %}

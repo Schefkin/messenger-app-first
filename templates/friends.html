@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Friends
+{% endblock %}
+
+{% block main %}
+
+    <form action="/friends" method="post">
+        {% for friend in friend_list %}
+
+            <div>
+                <input type="submit" class="text-button" value="{{ friend['name'] }}" name="friend_name">
+            </div>
+
+        {% endfor %}
+    </form>
+
+{% endblock %}
